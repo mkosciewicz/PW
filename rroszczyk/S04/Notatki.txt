@@ -1,0 +1,7 @@
+Liczba | 100
+*ptr (wskaznik)
+Umper sand: (zwiastuje Liczba)
+
+0: 
+1: text
+2: text /* to będzie przez komp odczytane tzn wirus tj blabla int main ()*/
