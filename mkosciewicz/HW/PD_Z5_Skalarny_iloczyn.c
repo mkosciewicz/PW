@@ -8,7 +8,7 @@ struct s_cplx{
 };
 
 
-void prt_cplx(struct s_cplx *a,int rozmiar)
+void prnt_cplx(struct s_cplx *a,int rozmiar)
 {	
 	for (int i =0; i<rozmiar; ++i)
 	{
@@ -16,44 +16,43 @@ void prt_cplx(struct s_cplx *a,int rozmiar)
 	}
 }
 
-void wczytaj_cplx(struct s_cplx *a, int rozmiar)
+void read_cplx(struct s_cplx *a, int rozmiar)
 {
 	for (int i =0; i<rozmiar; ++i)
 	{
-	printf("\n\npodaj wartosci dla %d-tej skladowej wektora %s",i,a->name);
-	printf ("\npodaj czesc rzeczywista zmiennej %s = ",(a+i)->name);
+	printf("\n\nwprowadz wartosci dla %d-tej skladowej wektora %s",i,a->name);
+	printf ("\nwprowadz czesc rzeczywista zmiennej %s = ",(a+i)->name);
 	scanf("%lf", &((a+i)->re));
-	printf ("podaj czesc urojona zmiennej %s = ",(a+i)->name);
+	printf ("wprowadz czesc urojona zmiennej %s = ",(a+i)->name);
 	scanf("%lf",&((a+i)->im));
 	}
 }
 
-void dodaj_cplx(struct s_cplx *a,struct s_cplx *b,struct s_cplx *c)
+void add_plx(struct s_cplx *a,struct s_cplx *b,struct s_cplx *c)
 {
 	c->re = a->re + b->re;
 	c->im = a->im + b->im;
 }
 
-void odejmij_cplx(struct s_cplx *a,struct s_cplx *b,struct s_cplx *c)
+void subs_cplx(struct s_cplx *a,struct s_cplx *b,struct s_cplx *c)
 {
 	c->re = a->re - b->re;
 	c->im = a->im - b->im;
 }
 
-void mnoz_cplx(struct s_cplx *a,struct s_cplx *b,struct s_cplx *c)
+void mltp_cplx(struct s_cplx *a,struct s_cplx *b,struct s_cplx *c)
 {
 	c->re = (a->re)*(b->re) - (a->im)*(b->im) ;
 	c->im = (a->re)*(b->im) + (a->im)*(b->re);
 }
 
-void dziel_cplx(struct s_cplx *a,struct s_cplx *b,struct s_cplx *c)
+void div_cplx(struct s_cplx *a,struct s_cplx *b,struct s_cplx *c)
 {
-	int mianownik = pow(b->re,2) + pow(b->im,2);
-	c->re = ((a->re)*(b->re) + (a->im)*(b->im))/mianownik ;
-	c->im = ( (a->im)*(b->re) - (a->re)*(b->im))/mianownik;
+	c->re = ((a->re)*(b->re)) + ((a->im)*(b->im))/((b->re)*(b->re)) + ((b->re)*(b->re));
+	c->im = ((a->im)*(b->re)) - ((a->re)*(b->im))/((b->re)*(b->re)) + ((b->re)*(b->re));
 }
 
-void il_skal(struct s_cplx *a,struct s_cplx *b,struct s_cplx *d,int rozmiar_mniejszego_wektora)
+void scal_mltp(struct s_cplx *a,struct s_cplx *b,struct s_cplx *d,int rozmiar_mniejszego_wektora)
 {
 
 	for (int i =0;i<rozmiar_mniejszego_wektora;++i)
@@ -80,40 +79,39 @@ int main(void)
 	
 		for (int n = 0; n < 5; ++n )
 		{
-			
 			v[n].name = "v";
 			u[n].name = "u";
 		}
 	
-	wczytaj_cplx(&a,1);
-	prt_cplx(&a,1);
+	read_cplx(&a,1);
+	prnt_cplx(&a,1);
 	
-	wczytaj_cplx(&b,1);
-	prt_cplx(&b,1);
+	read_cplx(&b,1);
+	prnt_cplx(&b,1);
 	
-	dodaj_cplx(&a,&b,&c);
+	add_plx(&a,&b,&c);
 	printf("\n\nwynik dodawania a+b =c =>");
-	prt_cplx(&c,1);
+	prnt_cplx(&c,1);
 	
-	odejmij_cplx(&b,&a,&d);
+	subs_cplx(&b,&a,&d);
 	printf("\nwynik odejmowania b-a =d =>");
-	prt_cplx(&d,1);
+	prnt_cplx(&d,1);
 	
-	mnoz_cplx(&c,&d,&e);
+	mltp_cplx(&c,&d,&e);
 	printf("\nwynik mnozenia c*d =e =>");
-	prt_cplx(&e,1);
+	prnt_cplx(&e,1);
 	
-	dziel_cplx(&d,&c,&f);
+	div_cplx(&d,&c,&f);
 	printf("\nwynik dzielenia d/c =f =>");
-	prt_cplx(&f,1);
+	prnt_cplx(&f,1);
 	
-	wczytaj_cplx(&v,5);
-	prt_cplx(&v,5);
-	wczytaj_cplx(&u,5);
-	prt_cplx(&u,5);
+	read_cplx(&v,5);
+	prnt_cplx(&v,5);
+	read_cplx(&u,5);
+	prnt_cplx(&u,5);
 	
-	il_skal(&v,&u,&g,5);
-	prt_cplx(&g,1);
+	scal_mltp(&v,&u,&g,5);
+	prnt_cplx(&g,1);
 
 	return 0;
 }
